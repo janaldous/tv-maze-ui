@@ -11,14 +11,5 @@
       min-width: 200px;
       background-color: lightgrey;
     }
-
-    .picture-scroll {
-      overflow-x: scroll;
-      -ms-overflow-style: none; /* Internet Explorer 10+ */
-      scrollbar-width: none; /* Firefox */
-      &::-webkit-scrollbar {
-        display: none; /* Safari and Chrome */
-      }
-    }
   }
 }

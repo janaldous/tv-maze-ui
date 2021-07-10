@@ -12,6 +12,7 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import "./ShowDetailPage.scss";
 import FavoriteService from "../../service/FavoriteService";
 import dompurify from "dompurify";
+import ScrollContainer from "react-indiana-drag-scroll";
 
 interface FavoriteIconProps {
   favorite: boolean;
@@ -93,31 +94,35 @@ const ShowDetailPage: React.FC<{}> = () => {
         </div>
         <div className="row mb-4">
           <h2 className="mb-3">Cast</h2>
-          <div className="picture-scroll d-flex">
-            {cast.length === 0 && <div>No data</div>}
-            {cast.map((castMember) => (
-              <div className="me-3" key={castMember.character.id}>
-                <PictureCard
-                  imageURL={castMember.person.image?.medium}
-                  text={castMember.person.name}
-                />
-              </div>
-            ))}
-          </div>
+          <ScrollContainer className="scroll-container" horizontal={true}>
+            <div className="d-flex">
+              {cast.length === 0 && <div>No data</div>}
+              {cast.map((castMember) => (
+                <div className="me-3" key={castMember.character.id}>
+                  <PictureCard
+                    imageURL={castMember.person.image?.medium}
+                    text={castMember.person.name}
+                  />
+                </div>
+              ))}
+            </div>
+          </ScrollContainer>
         </div>
         <div className="row mb-4">
           <div className="h2 mb-3">Seasons</div>
-          <div className="picture-scroll d-flex">
-            {seasons.length === 0 && <div>No data</div>}
-            {seasons.map((season) => (
-              <div className="me-3" key={season.number}>
-                <PictureCard
-                  imageURL={season.image?.medium}
-                  text={`Season ${season.number}`}
-                />
-              </div>
-            ))}
-          </div>
+          <ScrollContainer className="scroll-container" horizontal={true}>
+            <div className="picture-scroll d-flex">
+              {seasons.length === 0 && <div>No data</div>}
+              {seasons.map((season) => (
+                <div className="me-3" key={season.number}>
+                  <PictureCard
+                    imageURL={season.image?.medium}
+                    text={`Season ${season.number}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </ScrollContainer>
         </div>
       </div>
     </div>
