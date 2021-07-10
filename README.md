@@ -1,8 +1,21 @@
-# Getting Started with Create React App
+# Signal AI Take Home Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Search and see details of TV Shows
 
-## Available Scripts
+# Getting Started
+
+docs/openapi.yaml: TVmaze api OpenApi 3 doc was manually created
+
+1. Run `npm install` to install dependencies
+2. Run `npm start` to start the development webserver
+
+# TV Maze Api Client
+
+Change OpenAPI specs in `docs/openapi.yaml`
+
+`npm run openapi:generate-client`
+
+## Available Scripts (from original README)
 
 In the project directory, you can run:
 
