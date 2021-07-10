@@ -1,0 +1,334 @@
+openapi: 3.0.1
+info:
+  title: TVmaze api
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://api.tvmaze.com/
+paths:
+  /search/shows/:
+    get:
+      summary: Search shows
+      operationId: SearchShows
+      parameters:
+        - name: q
+          in: query
+          description: Fuzzy matching results of query to tv show
+          schema: {}
+      responses:
+        200:
+          description: Search result
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SearchResult"
+      deprecated: false
+  /shows/{showId}:
+    get:
+      summary: Get show detail
+      operationId: GetShowDetail
+      parameters:
+        - name: showId
+          in: path
+          description: show id
+          required: true
+          schema: {}
+      responses:
+        200:
+          description: Show detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ShowDetail"
+  /shows/{showId}/cast:
+    get:
+      summary: Get cast of the show
+      operationId: GetShowCast
+      parameters:
+        - name: showId
+          in: path
+          description: show id
+          required: true
+          schema: {}
+      responses:
+        200:
+          description: Show cast
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CastDetail"
+  /shows/{showId}/seasons:
+    get:
+      summary: Get list of seasons of the show
+      operationId: GetShowSeasons
+      parameters:
+        - name: showId
+          in: path
+          description: show id
+          required: true
+          schema: {}
+      responses:
+        200:
+          description: Show cast
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Season"
+components:
+  schemas:
+    SearchResult:
+      type: object
+      required:
+        - score
+        - show
+      properties:
+        score:
+          type: number
+        show:
+          $ref: "#/components/schemas/ShowDetail"
+    ShowDetail:
+      type: object
+      required:
+        - id
+        - url
+        - name
+        - genres
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+          format: uri
+        name:
+          type: string
+        type:
+          type: string
+        language:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+        runtime:
+          type: integer
+        averageRuntime:
+          type: integer
+        premiered:
+          type: string
+          format: date
+        officialSite:
+          type: string
+          format: uri
+        schedule:
+          type: object
+          properties:
+            time:
+              type: string
+            days:
+              type: array
+              items:
+                type: string
+        rating:
+          type: object
+          properties:
+            average:
+              type: number
+        weight:
+          type: number
+        network:
+          $ref: "#/components/schemas/Network"
+        webChannel:
+          type: string
+        dvdCountry:
+          type: string
+        externals:
+          type: object
+          properties:
+            tvage:
+              type: integer
+            thetvdb:
+              type: integer
+            imdb:
+              type: string
+        image:
+          $ref: "#/components/schemas/Image"
+        summary:
+          type: string
+        updated:
+          type: integer
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+            previousepisode:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+    CastDetail:
+      type: object
+      required:
+        - person
+        - character
+      properties:
+        person:
+          $ref: "#/components/schemas/PersonDetail"
+        character:
+          $ref: "#/components/schemas/CharacterDetail"
+        self:
+          type: boolean
+        voice:
+          type: boolean
+    PersonDetail:
+      type: object
+      required:
+        - id
+        - name
+        - gender
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+          format: uri
+        name:
+          type: string
+        country:
+          $ref: "#/components/schemas/Country"
+        birthday:
+          type: string
+          format: date
+        deathday:
+          type: string
+          format: date
+        gender:
+          type: string
+        image:
+          $ref: "#/components/schemas/Image"
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+    CharacterDetail:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+          format: uri
+        name:
+          type: string
+        image:
+          $ref: "#/components/schemas/Image"
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+    Country:
+      type: object
+      required:
+        - name
+        - code
+        - timezone
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        timezone:
+          type: string
+    Image:
+      type: object
+      required:
+        - medium
+        - original
+      properties:
+        medium:
+          type: string
+          format: uri
+        original:
+          type: string
+          format: uri
+    Season:
+      type: object
+      required:
+        - id
+        - url
+        - number
+        - premiereDate
+        - endDate
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+          format: uri
+        number:
+          type: integer
+        name:
+          type: string
+        episodeOrder:
+          type: integer
+        premiereDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        network:
+          $ref: "#/components/schemas/Network"
+        webChannel:
+          type: string
+        image:
+          $ref: "#/components/schemas/Image"
+        summary:
+          type: string
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+    Network:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        country:
+          $ref: "#/components/schemas/Country"
