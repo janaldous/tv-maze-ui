@@ -1,0 +1,13 @@
+.picture-card {
+  width: 120px;
+
+  .image {
+    height: 200px;
+    width: 120px;
+    object-fit: cover;
+  }
+
+  .image-substitute {
+    background-color: lightgrey;
+  }
+}

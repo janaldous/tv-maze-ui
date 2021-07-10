@@ -1,0 +1,15 @@
+.show-card {
+  width: 175px;
+
+  .image {
+    height: 250px;
+    object-fit: cover;
+  }
+  .image-substitute {
+    background-color: lightgrey;
+  }
+  .genre {
+    color: grey;
+    font-size: 0.75rem;
+  }
+}

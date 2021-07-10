@@ -1,0 +1,24 @@
+.show-detail-page {
+  .back-link {
+    color: grey;
+  }
+
+  .main-content {
+    max-width: 968px;
+
+    .main-image {
+      height: 250px;
+      min-width: 200px;
+      background-color: lightgrey;
+    }
+
+    .picture-scroll {
+      overflow-x: scroll;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
+    }
+  }
+}
