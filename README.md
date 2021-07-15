@@ -1,4 +1,4 @@
-# Signal AI Take Home Test
+# TV Maze UI
 
 Search and see details of TV Shows
 
